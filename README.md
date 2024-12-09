@@ -1,1 +1,1 @@
-Esercizi per l'elaborato di Architettura dei Sistemi Digitali (ASDI) - 2024/2025.
+Esercizi per gli homeworks di Algoritmi e Struttura Dati (ASD) - 2024/2025.
