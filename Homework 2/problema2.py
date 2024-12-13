@@ -1,7 +1,7 @@
 def find_coins(V: int, coins: list[int]) -> int:
 
     n = len(coins)
-    if n > 5 or V < 0:
+    if n == 0 or V < 0:
         return -1
         
     memo = {}
