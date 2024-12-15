@@ -1,20 +1,20 @@
 def find_coins(V: int, coins: list[int]) -> int:
 
     n = len(coins)
-    if n == 0 or V < 0:
+    if n == 0 or V < 0: # controllo su boundary values
         return -1
 
-    memo = {}
+    memo = {}   # dizionario per memoizzare risultati già valutati
     
     def find_min_num_coins(cost):
         
-        if cost == 0:
+        if cost == 0:   # caso base
             return 0 
         
-        if cost in memo:
-            return memo[cost]
+        if cost in memo: # se è già stato calcolato il risultato per arrivare al costo corrente
+            return memo[cost]   # restituiscilo
         
-        num_coins = float('inf')
+        num_coins = float('inf')    # valori sentinella
         min_greater_cost = float('inf')
 
         for coin in coins:
@@ -23,14 +23,13 @@ def find_coins(V: int, coins: list[int]) -> int:
             else:
                 min_greater_cost = min(min_greater_cost, abs(cost - coin))
 
-        if num_coins == float('inf'):
-            num_coins = find_min_num_coins(cost + min_greater_cost)
+        if num_coins == float('inf'):   # se non trovo alcuna soluzione con il costo assegnato
+            num_coins = find_min_num_coins(cost + min_greater_cost) # tento con un valore maggiore
 
         memo[cost] = num_coins
         return num_coins
     
-    num_coins = find_min_num_coins(V)
-    return -1 if num_coins == float('inf') else num_coins
+    return find_min_num_coins(V)
 
 def test_func(value, coins, result): # funzione per il testing
     num_coins = find_coins(value, coins)
