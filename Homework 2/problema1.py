@@ -1,28 +1,28 @@
 def largest_sum_subarray(arr: list[int]) -> int:
 
     n = len(arr)
-    if n == 0:
+    if n == 0:  # controllo su boundary values
         return 0
-    if n == 1:
+    if n == 1:  # controllo su boundary values
         return arr[0]
 
-    max_sums = {}
+    max_sums = {}   # dizionario per memoizzare risultati già valutati
 
     def get_max_sum(index):
 
-        if index == 0:
+        if index == 0:  # caso base
             return arr[0]
 
-        if index in max_sums:
-            return max_sums[index]
+        if index in max_sums:   # se è già stato calcolato il risultato per l'indice corrente
+            return max_sums[index]  # restituiscilo
 
         max_sums[index] = max( arr[index], get_max_sum(index-1) + arr[index] )
-        return max_sums[index]
+        return max_sums[index] 
 
     for i in range(n):
-        get_max_sum(i)
+        get_max_sum(i)  # calcola la somma massima a partire da ogni indice
 
-    return max( max_sums.values() )
+    return max( max_sums.values() ) # ritorna il valore più grande trovato
 
 def test_func(array, result): # funzione per il testing
     sum = largest_sum_subarray(array)
